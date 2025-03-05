@@ -1,0 +1,32 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+<Dialog title="Employees" contentWidth="50%">
+<Table id="table11" items="{/EmployeeSet}">
+                <headerToolbar>
+                    <Toolbar id="toolbar11">
+                        <Title id="title11" text="Employees from oData Model"></Title>
+                    </Toolbar>
+                </headerToolbar>
+                <columns>
+                    <Column id="c111">
+                        <Text id="t111" text="Employee Id"></Text>
+                    </Column>
+                    <Column id="c211">
+                        <Text id="t211" text="Employee Name"></Text>
+                    </Column>
+                    <Column id="c311">
+                        <Text id="t311" text="Designation"></Text>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem id="cl111" type="Active" press="onRowPress">
+                        <Text id="te111" text="{Empid}"></Text>
+                        <Text id="te211" text="{Name}"></Text>
+                        <Text id="te311" text="{Designation}"></Text>
+                    </ColumnListItem>
+                </items>
+            </Table>
+            <endButton>
+            <Button text="Clsoe" type="Negative" press="onClose"></Button>
+            </endButton>
+</Dialog>
+</core:FragmentDefinition>

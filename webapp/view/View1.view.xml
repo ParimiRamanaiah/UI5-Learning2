@@ -1,0 +1,286 @@
+<mvc:View xmlns:core="sap.ui.core" controllerName="com.ram.project1.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form">
+    <Page id="page" title="" class="sapUiSmallMarginTop">
+
+        <content>
+            <Label text="Employee Value Help(F4 Help): " class="sapUiTinyMarginTop"></Label>
+            <Input width="25%" showValueHelp="true" valueHelpRequest="onValueHelp" id="idInput"></Input>
+
+            <Panel headerText="Search Employees" expandable="true" expanded="true" class="sapUiSmallMargin" width="auto">
+            <f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="2" labelSpanL="2" labelSpanM="2" labelSpanS="12" emptySpanXL="6" emptySpanL="6"
+            emptySpanM="6" emptySpanS="12">
+            <f:content>
+             <Label text="Empid"></Label>
+            <Input id="IdempId"></Input>
+             <Label text="Name"></Label>
+            <Input id="IdName"></Input>
+            <Label text="Designation"></Label>
+            <Input id="Idgo"></Input>
+            <Label text="Skill"></Label>
+            <Input id="Idgoo"></Input>
+             <Label text="Salary"></Label>
+             <Select id="idOpr" items="{lookUpModel>/aOpr}" change="onSelect">
+             <core:Item text="{lookUpModel>text}" key="{lookUpModel>key}"></core:Item>
+             </Select>
+            <Input id="IdSal"></Input>
+            <Input id="IdSal1" visible="false"></Input>
+            <Label text="Date Of Joining"></Label>
+            <DatePicker id="idDoj" displayFormat="dd-MM-yyyy" valueFormat="yyyy-MM-dd"></DatePicker>
+            </f:content>
+            </f:SimpleForm>
+           <FlexBox justifyContent="End">
+            <Button text="Go" type="Accept" icon="sap-icon://accept" press="onPressGo"></Button>
+            <Button text="Reset" type="Reject" icon="sap-icon://reset" class="sapUiTinyMarginBegin" press="onPressReset"></Button>
+           </FlexBox>
+            </Panel>
+
+            <Table id="table1" items="{/EmployeeSet}">
+                <headerToolbar>
+                    <Toolbar id="toolbar1">
+                        <Title id="title1" text="Employees from oData Model"></Title>
+                    </Toolbar>
+                </headerToolbar>
+                <columns>
+                    <Column id="c11">
+                        <Text id="t11" text="Employee Id"></Text>
+                    </Column>
+                    <Column id="c21">
+                        <Text id="t21" text="Employee Name"></Text>
+                    </Column>
+                    <Column id="c31">
+                        <Text id="t31" text="Designation"></Text>
+                    </Column>
+                    <Column id="s31">
+                        <Text id="ss31" text="Skill"></Text>
+                    </Column>
+                    <Column id="e31">
+                        <Text id="ee31" text="Email" wrapping="false" wrappingType="Normal"></Text>
+                    </Column>
+                     <Column id="r31">
+                        <Text id="re31" text="Salary"></Text>
+                    </Column>
+                    <Column id="c310">
+                        <Text id="t3100" text="Doj"></Text>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem id="cl11">
+                        <Text id="te11" text="{Empid}"></Text>
+                        <Text id="te21" text="{Name}"></Text>
+                        <Text id="te31" text="{Designation}"></Text>
+                        <Text id="tse31" text="{Skill}"></Text>
+                        <Text id="tr31" text="{Email}"></Text>
+                        <Text id="tg31" text="{Salary}"></Text>
+                        <!-- <Text id="te310" text="{Doj}"></Text> -->
+                        <Text id="te310" text="{path:'Doj',formatter:'.f.formatDate'}"></Text>
+
+                    </ColumnListItem>
+                </items>
+            </Table>
+
+            <Table id="table" items="{jsonModel>/results}">
+                <headerToolbar>
+                    <Toolbar id="toolbar">
+                        <Title id="title" text="Employees from Json Model"></Title>
+                    </Toolbar>
+                </headerToolbar>
+                <columns>
+                    <Column id="c">
+                        <Text id="t" text="S.No"></Text>
+                    </Column>
+                    <Column id="c1">
+                        <Text id="t1" text="Employee Id"></Text>
+                    </Column>
+                    <Column id="c2">
+                        <Text id="t2" text="Employee Name"></Text>
+                    </Column>
+                    <Column id="c3">
+                        <Text id="t3" text="Designation"></Text>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem id="cl1">
+                        <Text id="te" text="{jsonModel>SNo}"></Text>
+                        <Text id="te1" text="{jsonModel>Empid}"></Text>
+                        <Text id="te2" text="{jsonModel>Name}"></Text>
+                        <Text id="te3" text="{jsonModel>Designation}"></Text>
+                    </ColumnListItem>
+                </items>
+            </Table>
+
+            <List items="{/EmployeeSet}">
+                <headerToolbar>
+                    <Toolbar >
+                        <Title text="Employees"></Title>
+                    </Toolbar>
+                </headerToolbar>
+                <items>
+
+                    <!-- title="{Empid}" number="{Name}" numberUnit="{Salary}" -->
+                    <ObjectListItem>
+                        <attributes>
+                            <ObjectAttribute title="Employee Id" text="{Empid}"></ObjectAttribute>
+                            <ObjectAttribute title="Employee Name" text="{Name}"></ObjectAttribute>
+                            <ObjectAttribute title="Employee Skill" text="{Skill}"></ObjectAttribute>
+                            <ObjectAttribute title="Employee Designation" text="{Designation}"></ObjectAttribute>
+                            <ObjectAttribute title="Employee DOB" text="{Doj}"></ObjectAttribute>
+                            <ObjectAttribute title="Employee Salary" text="{Salary}"></ObjectAttribute>
+                        </attributes>
+                        <firstStatus>
+                            <ObjectStatus text="Active">
+                            </ObjectStatus>
+                        </firstStatus>
+                    </ObjectListItem>
+                </items>
+            </List>
+
+            <f:SimpleForm title="Multivalue UI Elements" editable="true" labelSpanXL="2" labelSpanL="2" labelSpanM="2" labelSpanS="12" emptySpanXL="6" emptySpanL="6" emptySpanM="6" emptySpanS="6">
+                <f:content>
+
+                    <Label text="I am a Select Box"></Label>
+                    <Select items="{/EmployeeSet}" forceSelection="false" selectedKey="">
+                        <core:Item text="Select"></core:Item>
+                        <core:Item text="{Name}"></core:Item>
+                    </Select>
+
+                    <!-- this is not possible with Select Item to show wo or more values -->
+                    <Label text="I am a Select Box"></Label>
+                    <Select items="{/EmployeeSet}" showSecondaryValues="true">
+                        <core:ListItem text="{Name}" additionalText="{Empid}"></core:ListItem>
+                    </Select>
+
+                    <!-- Like this possible to show two or more value -->
+                    <Label text="I am a Select Box"></Label>
+                    <Select items="{/EmployeeSet}">
+                        <core:Item text="{Name} -- {Empid}"></core:Item>
+                    </Select>
+
+
+                    <Label text="I am a Select Box"></Label>
+                    <Select id="idSelect" items="{/EmployeeSet}" change="onSelect">
+                        <core:Item text="{Name}" key="{Empid}"></core:Item>
+                    </Select>
+
+                </f:content>
+            </f:SimpleForm>
+
+            <f:SimpleForm title="Multivalue UI Elements" editable="true" labelSpanXL="2" labelSpanL="2" labelSpanM="2" labelSpanS="12" emptySpanXL="6" emptySpanL="6" emptySpanM="6" emptySpanS="6">
+                <f:content>
+
+                    <Label text="I am Combo Box"></Label>
+                    <ComboBox items="{/EmployeeSet}" id="idCombo" selectionChange="onCombo">
+                        <core:Item text="{Name}" key="{Designation}"></core:Item>
+                    </ComboBox >
+
+                    <Label text="I am Combo Box"></Label>
+                    <ComboBox items="{/EmployeeSet}" showSecondaryValues="true">
+                        <core:ListItem text="{Name}" additionalText="{Empid}"></core:ListItem>
+                    </ComboBox >
+
+                </f:content>
+            </f:SimpleForm>
+
+            <f:SimpleForm title="Multivalue UI Elements" editable="true" labelSpanXL="2" labelSpanL="2" labelSpanM="2" labelSpanS="12" emptySpanXL="6" emptySpanL="6" emptySpanM="6" emptySpanS="6">
+                <f:content>
+
+                    <Label text="I am MultiCombo Box"></Label>
+                    <MultiComboBox items="{/EmployeeSet}" showSelectAll="true" id="idmultiCombo" selectionFinish="onMultiCombo">
+                        <core:Item text="{Name}" key="{Salary}"></core:Item>
+                    </MultiComboBox >
+
+                </f:content>
+            </f:SimpleForm>
+
+            <f:SimpleForm title="Multivalue UI Elements" editable="true" labelSpanXL="2" labelSpanL="2" labelSpanM="2" labelSpanS="12" emptySpanXL="2" emptySpanL="2" emptySpanM="2" emptySpanS="2">
+                <f:content>
+
+                    <Label text="I am RadioButtonGroup"></Label>
+                    <RadioButtonGroup buttons="{/EmployeeSet}" columns="4" selectedIndex="-1" id="idRadio" select="onRadio">
+                        <RadioButton text="{Name}"></RadioButton>
+                    </RadioButtonGroup >
+
+                </f:content>
+            </f:SimpleForm>
+
+            <FlexBox justifyContent="End">
+                <Button id="idButton" text="Submit" press="onSubmit" type="Emphasized" class="sapUiLargeMarginEnd sapUiTinyMarginTop"></Button>
+
+            </FlexBox>
+
+            <f:SimpleForm title="Multivalue UI elements with local json data" labelSpanXL="2" labelSpanL="2" labelSpanM="2" labelSpanS="12" emptySpanXL="6" emptySpanL="6" emptySpanM="6" emptySpanS="6">
+                <f:content>
+                    <Label text="Select Gender" class="sapUiTinyMarginTop"></Label>
+                    <Select >
+                        <core:Item text="Male" key="M"></core:Item>
+                        <core:Item text="Female" key="F"></core:Item>
+                    </Select>
+
+                    <Label text="Select Gender" class="sapUiTinyMarginTop"></Label>
+                    <Select items="{lookUpModel>/aGender}" forceSelection="false">
+                        <core:Item text="{lookUpModel>gender}" key="{lookUpModel>key}"></core:Item>
+                    </Select>
+
+                    <Label text="Are you intersed to this job" class="sapUiTinyMarginTop"></Label>
+                    <RadioButtonGroup buttons="{lookUpModel>/aStatus}" selectedIndex="-1" columns="2">
+                        <buttons>
+                            <RadioButton text="{lookUpModel>status}"></RadioButton>
+                        </buttons>
+                    </RadioButtonGroup>
+
+                    <Label text="Select Day" class="sapUiTinyMarginTop"></Label>
+                    <ComboBox items="{lookUpModel>/aWeek}">
+                        <core:Item text="{lookUpModel>day}" key="{lookUpModel>key}"></core:Item>
+                    </ComboBox>
+                </f:content>
+            </f:SimpleForm>
+
+            <Table id="table111" items="{jsonModel>/results}" class="sapUiSmallMargin" width="auto">
+                <headerToolbar>
+                    <Toolbar id="toolbar111">
+                        <Title id="title111" text="Employees from Json Model"></Title>
+                    </Toolbar>
+                </headerToolbar>
+                <columns>
+                    <Column id="c11111">
+                        <Text id="t1111" text="S.No"></Text>
+                    </Column>
+                    <Column id="c1111">
+                        <Text id="t11111" text="Employee Id"></Text>
+                    </Column>
+                    <Column id="c22">
+                        <Text id="t22" text="Employee Name"></Text>
+                    </Column>
+                    <Column id="c34">
+                        <Text id="t35" text="Designation"></Text>
+                    </Column>
+                    <Column id="c36">
+                        <Text id="t37" text="Skill"></Text>
+                    </Column>
+                    <Column id="c366">
+                        <Text id="t377" text="Salary"></Text>
+                    </Column>
+                    <Column id="c38">
+                        <Text id="t39" text="Doj"></Text>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem id="cl1111">
+                        <!-- <Text id="te11111" text="{jsonModel>SNo}"></Text> -->
+                        <Text id="te11111" text="{path:'jsonModel>Empid',formatter:'.f.formatSNo'}"></Text>
+                        <Text id="te111111" text="{jsonModel>Empid}"></Text>
+                        <Text id="te2111" text="{jsonModel>Name}"></Text>
+                        <Text id="te3111" text="{jsonModel>Designation}"></Text>
+                        <!-- <Text id="te31113" text="{jsonModel>Skill}"></Text> -->
+                        <!-- <ObjectStatus text="{jsonModel>Skill}" state="Warning"></ObjectStatus> -->
+                        <ObjectStatus text="{jsonModel>Skill}" state="{path:'jsonModel>Skill',formatter:'.f.colorSkill'}"></ObjectStatus>
+                        <Text id="te31114" text="{jsonModel>Salary}"></Text>
+                        <!-- <Text id="te31115" text="{jsonModel>Doj}"></Text> -->
+                        <Text id="te31115" text="{path:'jsonModel>Doj',formatter:'.f.formatDate'}"></Text>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>
